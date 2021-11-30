@@ -4,10 +4,10 @@ Android Tooltip
 Create Toast like tooltips, physical targets can be specified, or even points on screen.
 Many additional features and customizations. Just look at the samples Activities.
 
-[![Build Status](https://travis-ci.org/sephiroth74/android-target-tooltip.svg?branch=master)](https://travis-ci.org/sephiroth74/android-target-tooltip)
-
+<!-- [![Build Status](https://travis-ci.org/sephiroth74/android-target-tooltip.svg?branch=master)](https://travis-ci.org/sephiroth74/android-target-tooltip)
+ -->
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/it.sephiroth.android.library.targettooltip/target-tooltip-library/badge.svg)](https://maven-badges.herokuapp.com/maven-central/it.sephiroth.android.library.targettooltip/target-tooltip-library)
-[![](https://jitpack.io/v/sephiroth74/android-target-tooltip.svg)](https://jitpack.io/#sephiroth74/android-target-tooltip)
+[![](https://jitpack.io/v/swabbass/android-target-tooltip.svg)](https://jitpack.io/#swabbass/android-target-tooltip)
 
 Installation
 ===
@@ -15,7 +15,7 @@ Installation
 ## Maven
 
 ```gradle
-implementation 'it.sephiroth.android.library.targettooltip:target-tooltip-library:**version**'
+implementation 'com.github.swabbass:android-target-tooltip:Tag'
 ```	
 	
 ## JitPack
@@ -39,7 +39,7 @@ dependencies {
 }
 ```
 
-Get the latest version  on [JitPack](https://jitpack.io/#sephiroth74/android-target-tooltip)	
+Get the latest version  on [JitPack](https://jitpack.io/#swabbass/android-target-tooltip)	
 
 
 Usage
@@ -115,7 +115,7 @@ Screenshots
 ![Screen shot](./screenshots/video2.gif)
 
 
-[1]: https://github.com/sephiroth74/android-target-tooltip/blob/master/library/src/main/java/it/sephiroth/android/library/tooltip/Tooltip.java#L1471
+[1]: https://github.com/swabbass/android-target-tooltip/blob/master/library/src/main/java/it/sephiroth/android/library/tooltip/Tooltip.java#L1471
 
 
 License
