@@ -2,6 +2,9 @@
 
 buildscript {
     ext.kotlin_version = '1.5.31'
+    ext.appcompat = '1.4.0'
+    ext.core_ktx = '1.7.0'
+
     repositories {
         google()
         mavenCentral()
