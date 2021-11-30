@@ -9,12 +9,6 @@ Many additional features and customizations. Just look at the samples Activities
 Installation
 ===
 
-## Maven
-
-```gradle
-implementation 'com.github.swabbass:android-target-tooltip:Tag'
-```	
-	
 ## JitPack
 
 **Step 1.** Add the JitPack repository to your build file:
@@ -32,7 +26,7 @@ allprojects {
 
 ```gradle
 dependencies {
-        implementation 'com.github.sephiroth74:android-target-tooltip:Tag'
+        implementation 'com.github.swabbass:android-target-tooltip:Tag'
 }
 ```
 
