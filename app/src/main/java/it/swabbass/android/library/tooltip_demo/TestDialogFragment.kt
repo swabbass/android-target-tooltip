@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import it.swabbass.android.library.tooltip_demo.databinding.DialogFragmentBinding
+import it.swabbass.android.library.xtooltip.Builder
 import it.swabbass.android.library.xtooltip.ClosePolicy
-import it.swabbass.android.library.xtooltip.Tooltip
+import it.swabbass.android.library.xtooltip.Gravity
 
 class TestDialogFragment : DialogFragment() {
     private var _binding: DialogFragmentBinding? = null
@@ -20,13 +21,13 @@ class TestDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding. button1.setOnClickListener { button ->
-            Tooltip.Builder(context!!)
+            Builder(context!!)
                 .anchor(button, 0, 0, false)
                 .closePolicy(ClosePolicy.TOUCH_ANYWHERE_CONSUME)
                 .showDuration(0)
                 .text("This is a dialog")
                 .create()
-                .show(button, Tooltip.Gravity.TOP, false)
+                .show(button, Gravity.TOP, false)
         }
     }
     override fun onDestroyView() {

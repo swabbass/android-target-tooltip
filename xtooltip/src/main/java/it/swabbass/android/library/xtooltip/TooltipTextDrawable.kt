@@ -27,7 +27,7 @@ import kotlin.math.floor
  * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
  * OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-internal class TooltipTextDrawable(context: Context, builder: Tooltip.Builder) : Drawable() {
+internal class TooltipTextDrawable(context: Context, builder: Builder) : Drawable() {
     private val rectF: RectF
     private val path: Path
     private val tmpPoint = PointF()
@@ -39,7 +39,7 @@ internal class TooltipTextDrawable(context: Context, builder: Tooltip.Builder) :
     private var point: PointF? = null
     private var padding = 0
     private var arrowWeight = 0
-    private var gravity: Tooltip.Gravity? = null
+    private var gravity: Gravity? = null
 
     init {
 
@@ -88,7 +88,7 @@ internal class TooltipTextDrawable(context: Context, builder: Tooltip.Builder) :
         }
     }
 
-    fun setAnchor(gravity: Tooltip.Gravity, padding: Int, point: PointF?) {
+    fun setAnchor(gravity: Gravity, padding: Int, point: PointF?) {
         Timber.i("setAnchor($gravity, $padding, $point)")
         if (gravity != this.gravity || padding != this.padding || !ObjectsCompat.equals(this.point, point)) {
             this.gravity = gravity
@@ -142,12 +142,12 @@ internal class TooltipTextDrawable(context: Context, builder: Tooltip.Builder) :
         minX: Float
     ) {
 
-        if (gravity == Tooltip.Gravity.LEFT || gravity == Tooltip.Gravity.RIGHT) {
+        if (gravity == Gravity.LEFT || gravity == Gravity.RIGHT) {
             if (maxY - minY < arrowWeight * 2) {
                 arrowWeight = floor((maxY - minY) / 2).toInt()
                 Timber.w("adjusted arrowWeight to $arrowWeight")
             }
-        } else if (gravity == Tooltip.Gravity.BOTTOM || gravity == Tooltip.Gravity.TOP) {
+        } else if (gravity == Gravity.BOTTOM || gravity == Gravity.TOP) {
             if (maxX - minX < arrowWeight * 2) {
                 arrowWeight = floor((maxX - minX) / 2).toInt()
                 Timber.w("adjusted arrowWeight to $arrowWeight")
@@ -166,7 +166,7 @@ internal class TooltipTextDrawable(context: Context, builder: Tooltip.Builder) :
         // top/left
         path.moveTo(left + radius, top.toFloat())
 
-        if (drawPoint && gravity === Tooltip.Gravity.BOTTOM) {
+        if (drawPoint && gravity === Gravity.BOTTOM) {
             path.lineTo((left + tmpPoint.x - arrowWeight).toFloat(), top.toFloat())
             path.lineTo((left + tmpPoint.x).toFloat(), outBounds.top.toFloat())
             path.lineTo((left + tmpPoint.x + arrowWeight).toFloat(), top.toFloat())
@@ -176,7 +176,7 @@ internal class TooltipTextDrawable(context: Context, builder: Tooltip.Builder) :
         path.lineTo(right - radius, top.toFloat())
         path.quadTo(right.toFloat(), top.toFloat(), right.toFloat(), top + radius)
 
-        if (drawPoint && gravity === Tooltip.Gravity.LEFT) {
+        if (drawPoint && gravity === Gravity.LEFT) {
             path.lineTo(right.toFloat(), (top + tmpPoint.y - arrowWeight).toFloat())
             path.lineTo(outBounds.right.toFloat(), (top + tmpPoint.y).toFloat())
             path.lineTo(right.toFloat(), (top + tmpPoint.y + arrowWeight).toFloat())
@@ -186,7 +186,7 @@ internal class TooltipTextDrawable(context: Context, builder: Tooltip.Builder) :
         path.lineTo(right.toFloat(), bottom - radius)
         path.quadTo(right.toFloat(), bottom.toFloat(), right - radius, bottom.toFloat())
 
-        if (drawPoint && gravity === Tooltip.Gravity.TOP) {
+        if (drawPoint && gravity === Gravity.TOP) {
             path.lineTo((left + tmpPoint.x + arrowWeight).toFloat(), bottom.toFloat())
             path.lineTo((left + tmpPoint.x).toFloat(), outBounds.bottom.toFloat())
             path.lineTo((left + tmpPoint.x - arrowWeight).toFloat(), bottom.toFloat())
@@ -196,7 +196,7 @@ internal class TooltipTextDrawable(context: Context, builder: Tooltip.Builder) :
         path.lineTo(left + radius, bottom.toFloat())
         path.quadTo(left.toFloat(), bottom.toFloat(), left.toFloat(), bottom - radius)
 
-        if (drawPoint && gravity === Tooltip.Gravity.RIGHT) {
+        if (drawPoint && gravity === Gravity.RIGHT) {
             path.lineTo(left.toFloat(), (top + tmpPoint.y + arrowWeight).toFloat())
             path.lineTo(outBounds.left.toFloat(), (top + tmpPoint.y).toFloat())
             path.lineTo(left.toFloat(), (top + tmpPoint.y - arrowWeight).toFloat())
@@ -243,14 +243,14 @@ internal class TooltipTextDrawable(context: Context, builder: Tooltip.Builder) :
 
         private fun isDrawPoint(
             left: Float, top: Float, right: Float, bottom: Float, maxY: Float, maxX: Float, minY: Float,
-            minX: Float, tmpPoint: PointF, point: PointF, gravity: Tooltip.Gravity?,
+            minX: Float, tmpPoint: PointF, point: PointF, gravity: Gravity?,
             arrowWeight: Int
         ): Boolean {
             Timber.i("isDrawPoint: Rect($left, $top, $right, $bottom), x: [$minX, $maxX], y: [$minY, $maxY], point: $point, $arrowWeight")
             var drawPoint = false
             tmpPoint.set(point.x, point.y)
 
-            if (gravity == Tooltip.Gravity.RIGHT || gravity == Tooltip.Gravity.LEFT) {
+            if (gravity == Gravity.RIGHT || gravity == Gravity.LEFT) {
                 if (tmpPoint.y in top..bottom) {
                     if (top + tmpPoint.y + arrowWeight > maxY) {
                         tmpPoint.y = (maxY - arrowWeight.toFloat() - top.toFloat())
