@@ -1,12 +1,15 @@
 package it.swabbass.android.library.tooltip_demo
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import it.sephiroth.android.library.numberpicker.doOnProgressChanged
 import it.swabbass.android.library.tooltip_demo.databinding.ActivityMainBinding
-import it.swabbass.android.library.xtooltip.ClosePolicy
-import it.swabbass.android.library.xtooltip.Tooltip
-import it.swabbass.android.library.xtooltip.Typefaces
+import it.swabbass.android.library.xtooltip.*
 import timber.log.Timber
 
 
@@ -21,12 +24,55 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.rootView)
         val metrics = resources.displayMetrics
 
-        binding.button1.setOnClickListener { button ->
+        binding.customViewTooltip.setOnClickListener {
 
-            val gravity = Tooltip.Gravity.valueOf(binding.spinnerGravities.selectedItem.toString())
+            val gravity = Gravity.valueOf(binding.spinnerGravities.selectedItem.toString())
             val closePolicy = getClosePolicy()
             val typeface = if (binding.checkboxFont.isChecked) Typefaces[this, "fonts/GillSans.ttc"] else null
-            val animation = if (binding.checkboxAnimation.isChecked) Tooltip.Animation.DEFAULT else null
+            val animation = if (binding.checkboxAnimation.isChecked) Animation.DEFAULT else null
+            val showDuration = binding.seekbarDuration.progress.toLong()
+            val arrow = binding.checkboxArrow.isChecked
+            val overlay = binding.checkboxOverlay.isChecked
+            val style = if (binding.checkboxStyle.isChecked) R.style.ToolTipAltStyle else null
+            tooltip?.dismiss()
+
+            tooltip = Builder(this)
+                .anchor(it, 0, 0, false)
+                .customView(FrameLayout(this).apply {
+                    setBackgroundColor(Color.RED)
+                    addView(Button(this@MainActivity).apply {
+                        text="Click here to hide"
+                        setOnClickListener {
+//                            tooltip?.dismiss()
+                            Toast.makeText(this@MainActivity,"Clickedddddddd",Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                    layoutParams = ViewGroup.LayoutParams(300,200)
+                })
+                .styleId(style)
+                .typeface(typeface)
+                .maxWidth(metrics.widthPixels / 4)
+                .arrow(arrow)
+                .floatingAnimation(animation)
+                .closePolicy(closePolicy)
+                .showDuration(showDuration)
+                .overlay(overlay)
+                .create()
+
+            tooltip
+                ?.doOnHidden {
+                    tooltip = null
+                }
+                ?.doOnFailure { }
+                ?.doOnShown {}
+                ?.show(it, gravity, true)
+        }
+        binding.button1.setOnClickListener { button ->
+
+            val gravity = Gravity.valueOf(binding.spinnerGravities.selectedItem.toString())
+            val closePolicy = getClosePolicy()
+            val typeface = if (binding.checkboxFont.isChecked) Typefaces[this, "fonts/GillSans.ttc"] else null
+            val animation = if (binding.checkboxAnimation.isChecked) Animation.DEFAULT else null
             val showDuration = binding.seekbarDuration.progress.toLong()
             val arrow = binding.checkboxArrow.isChecked
             val overlay = binding.checkboxOverlay.isChecked
@@ -40,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
             tooltip?.dismiss()
 
-            tooltip = Tooltip.Builder(this)
+            tooltip = Builder(this)
                     .anchor(button, 0, 0, false)
                     .text(text)
                     .styleId(style)
