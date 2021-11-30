@@ -121,7 +121,9 @@ internal class TooltipTextDrawable(context: Context, builder: Tooltip.Builder) :
         val minX = left + radius
 
         if (null != point && null != gravity) {
-            calculatePathWithGravity(outBounds, left, top, right, bottom, maxY, maxX, minY, minX)
+            calculatePathWithGravity(outBounds, left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), maxY, maxX,
+                minY,
+                minX)
         } else {
             rectF.set(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat())
             path.addRoundRect(rectF, radius, radius, Path.Direction.CW)
@@ -130,10 +132,10 @@ internal class TooltipTextDrawable(context: Context, builder: Tooltip.Builder) :
 
     private fun calculatePathWithGravity(
         outBounds: Rect,
-        left: Int,
-        top: Int,
-        right: Int,
-        bottom: Int,
+        left: Float,
+        top: Float,
+        right: Float,
+        bottom: Float,
         maxY: Float,
         maxX: Float,
         minY: Float,
@@ -240,7 +242,7 @@ internal class TooltipTextDrawable(context: Context, builder: Tooltip.Builder) :
         const val ARROW_RATIO_DEFAULT = 1.4f
 
         private fun isDrawPoint(
-            left: Int, top: Int, right: Int, bottom: Int, maxY: Float, maxX: Float, minY: Float,
+            left: Float, top: Float, right: Float, bottom: Float, maxY: Float, maxX: Float, minY: Float,
             minX: Float, tmpPoint: PointF, point: PointF, gravity: Tooltip.Gravity?,
             arrowWeight: Int
         ): Boolean {
@@ -273,17 +275,17 @@ internal class TooltipTextDrawable(context: Context, builder: Tooltip.Builder) :
             return drawPoint
         }
 
-        private fun clampPoint(left: Int, top: Int, right: Int, bottom: Int, tmpPoint: PointF) {
+        private fun clampPoint(left: Float, top: Float, right: Float, bottom: Float, tmpPoint: PointF) {
             if (tmpPoint.y < top) {
-                tmpPoint.y = top.toFloat()
+                tmpPoint.y = top
             } else if (tmpPoint.y > bottom) {
-                tmpPoint.y = bottom.toFloat()
+                tmpPoint.y = bottom
             }
             if (tmpPoint.x < left) {
-                tmpPoint.x = left.toFloat()
+                tmpPoint.x = left
             }
             if (tmpPoint.x > right) {
-                tmpPoint.x = right.toFloat()
+                tmpPoint.x = right
             }
         }
     }
