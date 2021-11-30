@@ -307,7 +307,6 @@ class Tooltip internal constructor(private val context: Context, builder: Builde
 
                 it.setPadding(mPadding / 2, mPadding / 2, mPadding / 2, mPadding / 2)
             }
-            contentView.setBackgroundColor(Color.CYAN)
             mFloatingAnimation?.let { contentView.setPadding(it.radius) }
 
             mTextView = contentView.findViewById(mTextViewIdRes)
