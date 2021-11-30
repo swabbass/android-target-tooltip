@@ -44,5 +44,5 @@ dependencies {
 }
 
 try {
-    apply from: 'https://raw.githubusercontent.com/sephiroth74/gradle-mvn-push/master/gradle-mvn-push.gradle'
+    apply from: 'https://raw.githubusercontent.com/swabbass/gradle-mvn-push/master/gradle-mvn-push.gradle'
 } catch(e) {}
