@@ -31,8 +31,9 @@ class MainActivity : AppCompatActivity() {
             val arrow = binding.checkboxArrow.isChecked
             val overlay = binding.checkboxOverlay.isChecked
             val style = if (binding.checkboxStyle.isChecked) R.style.ToolTipAltStyle else null
-            val text =
-                    if (binding.textTooltip.text.isNullOrEmpty()) binding.textTooltip.hint else binding.textTooltip.text!!.toString()
+            val text:CharSequence =
+                    if (binding.textTooltip.text.isNullOrEmpty()) binding.textTooltip.hint!! else binding.textTooltip
+            .text!!.toString()
 
             Timber.v("gravity: $gravity")
             Timber.v("closePolicy: $closePolicy")
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             fragment.showNow(supportFragmentManager, "test_dialog_fragment")
         }
 
-        binding.seekbarDuration.doOnProgressChanged { numberPicker, progress, formUser ->
+        binding.seekbarDuration.doOnProgressChanged { _, progress, _ ->
             binding.textDuration.text = "Duration: ${progress}ms"
         }
 
