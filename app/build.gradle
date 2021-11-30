@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 31
     defaultConfig {
-        applicationId "it.sephiroth.android.library.tooltip_demo"
+        applicationId "it.swabbass.android.library.tooltip_demo"
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 1

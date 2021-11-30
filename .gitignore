@@ -26,3 +26,4 @@ proguard/
 android-target-tooltip.iml
 *.iml
 .gradletasknamecache
+.DS_Store
