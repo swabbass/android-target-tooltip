@@ -7,6 +7,7 @@ import android.content.Context
 import android.graphics.*
 import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.text.Spannable
 import android.view.*
 import android.view.ViewGroup
@@ -60,7 +61,7 @@ class Tooltip private constructor(private val context: Context, builder: Builder
     private val mLayoutInsetDecor = true
     private val mWindowLayoutType = WindowManager.LayoutParams.TYPE_APPLICATION_PANEL
     private val mSoftInputMode = INPUT_METHOD_NOT_NEEDED
-    private val mHandler = Handler()
+    private val mHandler = Handler(Looper.myLooper()!!)
 
     private var mPopupView: TooltipViewContainer? = null
     private var mText: CharSequence?
@@ -245,7 +246,7 @@ class Tooltip private constructor(private val context: Context, builder: Builder
         update(context.resources.getString(res))
     }
 
-    @SuppressLint("RtlHardcoded")
+    @SuppressLint("RtlHardcoded", "WrongConstant")
     private fun createPopupLayoutParams(token: IBinder): WindowManager.LayoutParams {
         val p = WindowManager.LayoutParams()
         p.gravity = android.view.Gravity.LEFT or android.view.Gravity.TOP
